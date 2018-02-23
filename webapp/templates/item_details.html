@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Item: {{ item.name }} {% endblock %}
+{% block body %}
+{% if g.user %}
+  <h2>Item Details</h2>
+  {% if not item.verified and g.user.type == "admin" %}
+  <form action="/item/verify" method="get">
+    <input type="text" name="item_id" value="{{ item.item_id }}" hidden>
+    <button class="button">Verify</button>
+  </form>
+  {% endif %}
+  <form action="/item/edit" method="get">
+    <input type="text" name="item_id" value="{{ item.item_id }}" hidden>
+    <button class="button">Edit</button>
+  </form>
+  <dl>
+    <p><strong>Item ID:&#9</strong>{{ item.item_id }}</p>
+    <p><strong>Name:&#9</strong>{{ item.name }}</p>
+    <p><strong>Owner:&#9</strong>{{ item.owner }}</p>
+    <p><strong>Data:&#9</strong>{{ item.data }}</p>
+    <p><strong>Verified:&#9</strong>{{ "Yes" if item.verified else "No" }}</p>
+    <p><strong>Verified By:&#9</strong>{{ item.verified_by if item.verified_by else "-" }}</p>
+    <p><strong>Combined:&#9</strong>{{ "Yes" if item.derived else "No" }}</p>
+    <p><strong>Parent Items:&#9</strong>{{ item.linked_items if item.linked_items else "-" }}</p>
+    <p><strong>Time Stamped:&#9</strong>{{ "Yes" if item.timestamped else "No" }}</p>
+    <p><strong>Time Stamped Transaction:&#9</strong><a href="{{ url_for('transaction_detail', txn_id=item.stamp_txn_id) }}">{{ item.stamp_txn_id if item.stamp_txn_id else "-" }}</a></p>
+  </dl>
+{% endif %}
+{% endblock %}

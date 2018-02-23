@@ -1,0 +1,33 @@
+<!doctype html>
+<title>{% block title %}Welcome{% endblock %} | HamroSupply</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<div class="page">
+  <h1><a href="{{ url_for('home') }}">HamroSupply</a></h1>
+  <div class="navigation">
+  {% if g.user %}
+    <a href="{{ url_for('home') }}">Item List</a> |
+    <a href="{{ url_for('create_item') }}">Create Item</a> |
+    <a href="{{ url_for('all_transaction') }}">Transaction List</a> |
+    <a href="{{ url_for('profile') }}">Profile</a> |
+    <a href="{{ url_for('logout') }}">sign out [{{ g.user["uuid"] }}]</a>
+  {% else %}
+    <a href="{{ url_for('register') }}">sign up</a> |
+    <a href="{{ url_for('login') }}">sign in</a>
+  {% endif %}
+  </div>
+  {% with flashes = get_flashed_messages() %}
+    {% if flashes %}
+      <ul class="flashes">
+      {% for message in flashes %}
+        <li>{{ message }}
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <div class="body">
+  {% block body %}{% endblock %}
+  </div>
+  <div class="footer">
+    HamroSupply &mdash; Supply Chain management with Blockchain.
+  </div>
+</div>

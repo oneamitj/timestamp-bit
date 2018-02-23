@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %} Txn: {{ txn.txn_id }} {% endblock %}
+{% block body %}
+{% if g.user %}
+  <h2>Txn Details</h2>
+  {% if not txn.ts_start %}
+  <form action="/txn/stamp" method="get">
+    <input type="text" name="txn_id" value="{{ txn.txn_id }}" hidden>
+    <button class="button">Start Timestamp</button>
+  </form>
+  {% endif %}
+  &#9
+  {% if not txn.ts_complete and txn.ts_start %}
+  <form action="/txn/verify" method="get">
+    <input type="text" name="txn_id" value="{{ txn.txn_id }}" hidden>
+    <button class="button">Verify Timestamp</button>
+  </form>
+  {% endif %}
+  <dl>
+    <p><strong>Txn ID:&#9</strong>{{ txn.txn_id }}</p>
+    <p><strong>Type:&#9</strong>{{ txn.type }}</p>
+    <p><strong>Item ID:&#9</strong><a href="{{ url_for('item_detail', item_id=txn.item_id) }}">{{ txn.item_id }}</a></p>
+    <p><strong>Started:&#9</strong>{{ "Yes" if txn.ts_start else "No" }}</p>
+    <p><strong>Completed:&#9</strong>{{ "Yes" if txn.ts_complete else "No" }}</p>
+    <p><strong>Previous txn:&#9</strong>{{ txn.prev_tx if txn.prev_tx else "-" }}</p>
+    <p><strong>Time Stamp Info:&#9</strong><p>{{ ts_info }}</p></p>
+    <p><strong>OTS Transaction Info:&#9</strong><p>{{ ots_info }}</p></p>
+  </dl>
+{% endif %}
+{% endblock %}

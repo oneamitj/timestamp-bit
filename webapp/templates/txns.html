@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+{% if g.user %}
+    <ul class="txns">
+        <table>
+            <tr>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Item</th>
+              <th>Started</th>
+              <th>Completed</th>
+             </tr>
+        {% for txn in txns %}
+             <tr>
+              <td><a href="{{ url_for('transaction_detail', txn_id=txn.txn_id) }}">{{ txn.txn_id }}</a></td>
+              <td><a href="{{ url_for('transaction_detail', txn_id=txn.txn_id) }}">{{ txn.type }}</a></td>
+              <td><a href="{{ url_for('transaction_detail', txn_id=txn.txn_id) }}">{{ txn.item_id }}</a></td>
+              <td><a href="{{ url_for('transaction_detail', txn_id=txn.txn_id) }}">{{ txn.ts_start }}</a></td>
+              <td><a href="{{ url_for('transaction_detail', txn_id=txn.txn_id) }}">{{ txn.ts_complete }}</a></td>
+             </tr>
+        {% endfor %}
+        </table>
+    </ul>
+{% endif %}
+{% endblock %}

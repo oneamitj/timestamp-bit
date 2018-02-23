@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+{% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
+{% if g.user %}
+    <ul class="items">
+        <table>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Data</th>
+              <th>Owner</th>
+             </tr>
+        {% for item in items %}
+             <tr>
+              <td><a href="{{ url_for('item_detail', item_id=item.item_id) }}">{{ item.item_id }}</a></td>
+              <td><a href="{{ url_for('item_detail', item_id=item.item_id) }}">{{ item.name }}</a></td>
+              <td><a href="{{ url_for('item_detail', item_id=item.item_id) }}">{{ item.data }}</a></td>
+              <td><a href="{{ url_for('item_detail', item_id=item.item_id) }}">{{ item.owner }}</a></td>
+             </tr>
+        {% endfor %}
+        </table>
+    </ul>
+{% endif %}
+{% endblock %}

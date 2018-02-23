@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Edit Item{% endblock %}
+{% block body %}
+  <h2>Edit Item</h2>
+  {% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
+  <form action="" method="post" id="edititem">
+    <dl>
+      <input type="text" name="item_id" value="{{ item.item_id }}" hidden>
+      <dt>Name:
+      <dd>{{ item.name }}
+      <dt>Data:
+      <dd><textarea name="data" form="edititem" rows="9" cols="50">{{ request.form.data if request.form.data else item.data }}</textarea>
+    </dl>
+    <div class="actions"><input type="submit" value="Update"></div>
+  </form>
+{% endblock %}

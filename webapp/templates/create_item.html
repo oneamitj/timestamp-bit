@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}Create Item{% endblock %}
+{% block body %}
+  <h2>Create Item</h2>
+  <form action="" method="post" id="createitem">
+    <dl>
+      <dt>Name:
+      <dd><input type="text" name="name" size="50" value="{{ request.form.name }}">
+      <dt>Type:
+      <dd><select name="type" form="createitem">
+            <option value="pure">Independent Item</option>
+            <option value="derived">Combined Item</option>
+          </select>
+      <dt>Parent Items (item_id list, eg 1,3,13):
+      <dd><input type="text" name="link" size="50" value="{{ request.form.link }}">
+      <dt>Data:
+      <dd><textarea name="data" form="createitem" rows="9" cols="50">{{ request.form.data }}</textarea>
+    </dl>
+    <div class="actions"><input type="submit" value="Create Item"></div>
+  </form>
+{% endblock %}

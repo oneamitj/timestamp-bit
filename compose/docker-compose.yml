@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+  hamrosupply:
+    image: otspoc:latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == manager
+    ports:
+      - "8080:8080"
+    networks:
+      - bitcoin-network
+
+networks:
+  bitcoin-network:
+    

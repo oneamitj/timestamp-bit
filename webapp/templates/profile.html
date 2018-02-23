@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+    <ul class="items">
+        <dl>
+          <dt><strong>Indentification:&#9</strong> {{g.user.uuid}}
+        <dl>
+          <dt><strong>E-mail:&#9</strong> {{g.user.email}}
+        <dl>
+          <dt><strong>Type:&#9</strong> {{g.user.type}}
+        <dl>
+          <dt><strong>Verified:&#9</strong> {{"Yes" if g.user.verified else "No" }}
+        <dl>
+          <dt><strong>{{"Verified By:" if g.user.verified else "" }}&#9</strong>{{g.user.verified_by if g.user.verified else "" }}
+{% endblock %}
