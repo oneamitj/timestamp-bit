@@ -18,6 +18,7 @@ RUN apt-get install --yes python3 python3-pip
 RUN apt-get install --yes git
 RUN apt-get install --yes bitcoind bitcoin-tx
 RUN apt-get install cron
+RUN apt-get install --yes python3-requests
 
 # OTS Server
 RUN mkdir -p /root/.otsd/calendar/
